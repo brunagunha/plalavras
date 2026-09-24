@@ -11,9 +11,12 @@ body, html {
   overflow: hidden;
 }
 
-/* Cenário de fundo (céu + campo) — troque por sua imagem do Figma se quiser */
+/* Cenário de fundo — sua imagem exportada do Figma.
+   Se o arquivo fundo.png não existir na pasta, cai no gradiente de reserva */
 body {
-  background: url('fundo.png') center/cover no-repeat fixed;
+  background:
+    url('fundo.png') center/cover no-repeat fixed,
+    linear-gradient(to bottom, #7ec8f0 0%, #b8e4f5 45%, #a8d94e 46%, #7ab648 60%, #5a9c36 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,53 +27,74 @@ body {
   display: none;
   width: 100%;
   height: 100%;
-  padding: 24px;
+  padding: 40px 70px;   /* mais respiro nas laterais */
 }
 
 .tela.ativa {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;   /* filhos usam a largura toda */
   justify-content: center;
+}
+
+/* ===== LOGO (se você adicionou) ===== */
+.logo {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  z-index: 100;
 }
 
 /* ===== TELA INICIAL ===== */
 .conteudo-inicial {
   display: flex;
-  gap: 60px;
-  max-width: 980px;
-  background: rgba(200, 235, 245, 0.55);
-  border: 3px solid rgba(255, 255, 255, 0.7);
-  border-radius: 24px;
-  padding: 40px 48px;
-  backdrop-filter: blur(4px);
+  justify-content: space-between;  /* cola uma coluna em cada lado */
+  align-items: flex-start;
+  gap: 80px;
+  width: 100%;
 }
 
 .coluna {
   flex: 1;
+  max-width: 460px;               /* evita texto gigante em telas largas */
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+}
+
+.coluna.direita {
+  align-items: flex-end;          /* tudo colado à direita */
+  text-align: right;
+  align-self: flex-end;           /* desce a coluna direita como no Figma */
+  margin-bottom: 40px;
 }
 
 .titulo {
   color: #d7e84b;
   text-shadow: 2px 2px 0 rgba(90, 120, 40, .6);
-  font-size: 2rem;
+  font-size: 2.2rem;
   letter-spacing: 1px;
 }
 
 .regras {
   list-style: none;
   color: #24506e;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 .regras li {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   padding-left: 18px;
   position: relative;
+}
+
+.coluna.direita .regras li {
+  padding-left: 0;
+  padding-right: 18px;
 }
 
 .regras li::before {
@@ -79,6 +103,11 @@ body {
   left: 0;
   color: #d7e84b;
   font-weight: bold;
+}
+
+.coluna.direita .regras li::before {
+  left: auto;
+  right: 0;
 }
 
 .btn-jogue {
@@ -90,10 +119,14 @@ body {
   font-size: 1.6rem;
   font-weight: bold;
   letter-spacing: 3px;
-  padding: 14px 48px;
+  padding: 14px 60px;
   cursor: pointer;
   box-shadow: 0 5px 0 #5f7a15;
   transition: transform .1s, box-shadow .1s;
+}
+
+.coluna.direita .btn-jogue {
+  align-self: flex-end;   /* botão colado à direita */
 }
 
 .btn-jogue:hover { filter: brightness(1.08); }
@@ -105,11 +138,10 @@ body {
 /* ===== TELA DO JOGO ===== */
 .topo-jogo {
   width: 100%;
-  max-width: 720px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .btn-voltar {
@@ -145,31 +177,30 @@ body {
 /* Grupos já resolvidos */
 #grupos-resolvidos {
   width: 100%;
-  max-width: 720px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .cartao-grupo {
   background: linear-gradient(#9fd6ea, #7cc0dc);
   border: 3px solid rgba(255,255,255,.8);
   border-radius: 16px;
-  padding: 10px 16px;
+  padding: 12px 20px;
   text-align: center;
   animation: surgir .4s ease;
 }
 
 .cartao-grupo h2 {
   color: #1d4e6b;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   letter-spacing: 1px;
 }
 
 .cartao-grupo p {
   color: #2e6a8c;
-  font-size: .9rem;
+  font-size: 1rem;
 }
 
 @keyframes surgir {
@@ -177,22 +208,21 @@ body {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Grade de palavras */
+/* Grade de palavras — agora ocupa a tela toda */
 .grade {
   width: 100%;
-  max-width: 720px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 14px;
 }
 
 .palavra {
   background: linear-gradient(#a8d8ec, #8ec7e2);
   border: 3px solid rgba(255,255,255,.85);
   border-radius: 14px;
-  padding: 18px 6px;
+  padding: 26px 10px;         /* cartões mais altos */
   text-align: center;
-  font-size: .95rem;
+  font-size: 1.15rem;
   font-weight: bold;
   color: #24506e;
   cursor: pointer;
@@ -221,10 +251,12 @@ body {
 }
 
 .mensagem {
-  margin-top: 16px;
+  margin-top: 20px;
   min-height: 24px;
+  text-align: center;
   color: #fff;
   font-weight: bold;
+  font-size: 1.1rem;
   text-shadow: 1px 1px 0 rgba(0,0,0,.3);
 }
 
@@ -240,6 +272,7 @@ body {
   gap: 20px;
   align-items: center;
   color: #24506e;
+  align-self: center;    /* só o cartão centralizado */
 }
 
 .cartao-vitoria h1 {
@@ -248,26 +281,15 @@ body {
   font-size: 2.4rem;
 }
 
-/* ===== LOGO ===== */
-.logo {
-  position: fixed;      /* fica fixa na tela, mesmo rolando */
-  top: 16px;            /* distância do topo */
-  left: 16px;           /* distância da esquerda */
-  width: 80px;          /* tamanho da logo */
-  height: 60px;
-  object-fit: contain;  /* mantém a proporção */
-  z-index: 100;         /* fica por cima de tudo */
-  opacity: 0.9;
-}
-
-.logo:hover {
-  transform: scale(1.1);
-  transition: transform 0.2s;
-}
-
 /* ===== RESPONSIVO ===== */
-@media (max-width: 700px) {
-  .conteudo-inicial { flex-direction: column; gap: 24px; padding: 24px; }
-  .grade { gap: 6px; }
-  .palavra { font-size: .75rem; padding: 12px 4px; }
+@media (max-width: 800px) {
+  .tela { padding: 20px; }
+  .conteudo-inicial { flex-direction: column; gap: 24px; }
+  .coluna { max-width: 100%; }
+  .coluna.direita { align-items: flex-start; text-align: left; align-self: flex-start; }
+  .coluna.direita .regras li { padding-left: 18px; padding-right: 0; }
+  .coluna.direita .regras li::before { left: 0; right: auto; }
+  .coluna.direita .btn-jogue { align-self: flex-start; }
+  .grade { gap: 8px; }
+  .palavra { font-size: .8rem; padding: 14px 4px; }
 }
