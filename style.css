@@ -253,7 +253,7 @@ body {
   position: fixed;      /* fica fixa na tela, mesmo rolando */
   top: 16px;            /* distância do topo */
   left: 16px;           /* distância da esquerda */
-  width: 60px;          /* tamanho da logo */
+  width: 80px;          /* tamanho da logo */
   height: 60px;
   object-fit: contain;  /* mantém a proporção */
   z-index: 100;         /* fica por cima de tudo */
