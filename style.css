@@ -13,8 +13,7 @@ body, html {
 
 /* Cenário de fundo (céu + campo) — troque por sua imagem do Figma se quiser */
 body {
-  background:
-  background-image: url("fundo.png");
+  background: url('fundo.png') center/cover no-repeat fixed;
   display: flex;
   align-items: center;
   justify-content: center;
