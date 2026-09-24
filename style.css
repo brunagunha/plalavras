@@ -14,9 +14,7 @@ body, html {
 /* Cenário de fundo (céu + campo) — troque por sua imagem do Figma se quiser */
 body {
   background:
-    radial-gradient(circle at 80% 15%, rgba(255,255,255,.7) 0 60px, transparent 61px),
-    radial-gradient(circle at 15% 25%, rgba(255,255,255,.5) 0 90px, transparent 91px),
-    linear-gradient(to bottom, #7ec8f0 0%, #b8e4f5 45%, #a8d94e 46%, #7ab648 60%, #5a9c36 100%);
+  background-image: url("fundo.png");
   display: flex;
   align-items: center;
   justify-content: center;
