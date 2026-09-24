@@ -1,0 +1,259 @@
+/* ===== RESET E BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+}
+
+body, html {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Cenário de fundo (céu + campo) — troque por sua imagem do Figma se quiser */
+body {
+  background:
+    radial-gradient(circle at 80% 15%, rgba(255,255,255,.7) 0 60px, transparent 61px),
+    radial-gradient(circle at 15% 25%, rgba(255,255,255,.5) 0 90px, transparent 91px),
+    linear-gradient(to bottom, #7ec8f0 0%, #b8e4f5 45%, #a8d94e 46%, #7ab648 60%, #5a9c36 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== TELAS ===== */
+.tela {
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+}
+
+.tela.ativa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== TELA INICIAL ===== */
+.conteudo-inicial {
+  display: flex;
+  gap: 60px;
+  max-width: 980px;
+  background: rgba(200, 235, 245, 0.55);
+  border: 3px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  padding: 40px 48px;
+  backdrop-filter: blur(4px);
+}
+
+.coluna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.titulo {
+  color: #d7e84b;
+  text-shadow: 2px 2px 0 rgba(90, 120, 40, .6);
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.regras {
+  list-style: none;
+  color: #24506e;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.regras li {
+  margin-bottom: 14px;
+  padding-left: 18px;
+  position: relative;
+}
+
+.regras li::before {
+  content: "»";
+  position: absolute;
+  left: 0;
+  color: #d7e84b;
+  font-weight: bold;
+}
+
+.btn-jogue {
+  align-self: flex-start;
+  background: linear-gradient(#d7e84b, #a8c22e);
+  border: 3px solid #7a9420;
+  border-radius: 40px;
+  color: #3c4d10;
+  font-size: 1.6rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+  padding: 14px 48px;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #5f7a15;
+  transition: transform .1s, box-shadow .1s;
+}
+
+.btn-jogue:hover { filter: brightness(1.08); }
+.btn-jogue:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #5f7a15;
+}
+
+/* ===== TELA DO JOGO ===== */
+.topo-jogo {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-voltar {
+  background: rgba(255,255,255,.7);
+  border: 2px solid #6aa3c8;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.4rem;
+  color: #24506e;
+  cursor: pointer;
+}
+
+.info-jogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #d7e84b;
+  text-shadow: 1px 1px 0 rgba(90,120,40,.6);
+  font-weight: bold;
+}
+
+.btn-embaralhar {
+  background: rgba(255,255,255,.7);
+  border: 2px solid #6aa3c8;
+  border-radius: 20px;
+  padding: 8px 18px;
+  color: #24506e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Grupos já resolvidos */
+#grupos-resolvidos {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.cartao-grupo {
+  background: linear-gradient(#9fd6ea, #7cc0dc);
+  border: 3px solid rgba(255,255,255,.8);
+  border-radius: 16px;
+  padding: 10px 16px;
+  text-align: center;
+  animation: surgir .4s ease;
+}
+
+.cartao-grupo h2 {
+  color: #1d4e6b;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.cartao-grupo p {
+  color: #2e6a8c;
+  font-size: .9rem;
+}
+
+@keyframes surgir {
+  from { opacity: 0; transform: translateY(-12px) scale(.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Grade de palavras */
+.grade {
+  width: 100%;
+  max-width: 720px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.palavra {
+  background: linear-gradient(#a8d8ec, #8ec7e2);
+  border: 3px solid rgba(255,255,255,.85);
+  border-radius: 14px;
+  padding: 18px 6px;
+  text-align: center;
+  font-size: .95rem;
+  font-weight: bold;
+  color: #24506e;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .12s, background .12s;
+}
+
+.palavra:hover { transform: translateY(-3px); }
+
+.palavra.selecionada {
+  background: linear-gradient(#d7e84b, #b8cf33);
+  border-color: #7a9420;
+  color: #3c4d10;
+  transform: scale(1.04);
+}
+
+.palavra.errada {
+  animation: tremer .4s ease;
+}
+
+@keyframes tremer {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
+}
+
+.mensagem {
+  margin-top: 16px;
+  min-height: 24px;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.3);
+}
+
+/* ===== TELA DE VITÓRIA ===== */
+.cartao-vitoria {
+  background: rgba(200, 235, 245, 0.75);
+  border: 3px solid rgba(255,255,255,.8);
+  border-radius: 24px;
+  padding: 48px 64px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  color: #24506e;
+}
+
+.cartao-vitoria h1 {
+  color: #d7e84b;
+  text-shadow: 2px 2px 0 rgba(90,120,40,.6);
+  font-size: 2.4rem;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 700px) {
+  .conteudo-inicial { flex-direction: column; gap: 24px; padding: 24px; }
+  .grade { gap: 6px; }
+  .palavra { font-size: .75rem; padding: 12px 4px; }
+}

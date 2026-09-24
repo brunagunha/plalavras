@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jogo de Conexões - Estudo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ TELA INICIAL ============ -->
+  <section id="tela-inicial" class="tela ativa">
+    <div class="conteudo-inicial">
+      <div class="coluna">
+        <h1 class="titulo">Como funciona?</h1>
+        <ul class="regras">
+          <li>Você recebe 16 palavras e precisa agrupá-las em <strong>4 grupos de 4 palavras</strong> que tenham algo em comum.</li>
+          <li>As categorias vão do mais óbvio ao mais abstrato — quanto mais difícil o grupo, mais específica ou criativa é a conexão entre as palavras.</li>
+          <li>A cada partida encerrada você pode iniciar uma nova.</li>
+        </ul>
+      </div>
+      <div class="coluna direita">
+        <h1 class="titulo">Para estudar!</h1>
+        <ul class="regras">
+          <li>O modo estudo auxilia no treino por meio do jogo.</li>
+          <li>Facilita a memorização de conteúdos!</li>
+        </ul>
+        <button id="btn-jogue" class="btn-jogue">JOGUE</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TELA DO JOGO ============ -->
+  <section id="tela-jogo" class="tela">
+    <header class="topo-jogo">
+      <button id="btn-voltar" class="btn-voltar" title="Voltar">←</button>
+      <div class="info-jogo">
+        <span id="data"></span>
+        <span id="tentativas">Erros: 0</span>
+      </div>
+      <button id="btn-embaralhar" class="btn-embaralhar">Embaralhar</button>
+    </header>
+
+    <!-- Área dos grupos resolvidos (fica como na 3ª imagem) -->
+    <div id="grupos-resolvidos"></div>
+
+    <!-- Grade de palavras -->
+    <div id="grade" class="grade"></div>
+
+    <p id="mensagem" class="mensagem"></p>
+  </section>
+
+  <!-- ============ TELA DE VITÓRIA ============ -->
+  <section id="tela-vitoria" class="tela">
+    <div class="cartao-vitoria">
+      <h1>🎉 Parabéns!</h1>
+      <p>Você encontrou todos os grupos com <span id="erros-finais"></span> erro(s).</p>
+      <button id="btn-novamente" class="btn-jogue">JOGAR DE NOVO</button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
