@@ -257,6 +257,12 @@ body {
   height: 60px;
   object-fit: contain;  /* mantém a proporção */
   z-index: 100;         /* fica por cima de tudo */
+  opacity: 0.9;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s;
 }
 
 /* ===== RESPONSIVO ===== */
