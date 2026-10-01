@@ -58,7 +58,7 @@ h2 {
 .inicio-grade {
   display: flex;            /* coloca as duas caixas lado a lado */
   gap: 28px;                /* espaço entre elas */
-  width: 1100px;
+  width: 1000px;
   max-width: 100%;
   margin: auto 0;
   align-items: flex-start;
@@ -66,15 +66,15 @@ h2 {
 
 .inicio-grade .vidro {
   flex: 1;                  /* as duas caixas têm o mesmo tamanho */
-  padding: 28px 32px;
+  padding: 26px 29px;
   color: white;
-  font-size: 19px;
+  font-size: 17px;
   line-height: 1.45;
 }
 
 .inicio-grade h2 {
-  margin: -56px 0 16px 0;   /* margem negativa: o título sobe para fora da caixa */
-  font-size: 32px;
+  margin: -50px 0 15px 0;   /* margem negativa: o título sobe para fora da caixa */
+  font-size: 29px;
   text-align: center;
 }
 
@@ -95,8 +95,8 @@ h2 {
   z-index: 1;               /* fica na frente dos bonecos */
   display: block;
   margin: 40px auto 0 auto;
-  padding: 14px 46px;
-  font-size: 24px;
+  padding: 13px 42px;
+  font-size: 22px;
   font-weight: 600;
   color: #34480a;
   background: #d8e86e;
@@ -133,10 +133,10 @@ h2 {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  width: 720px;
+  width: 680px;
   max-width: 100%;
   margin-bottom: 14px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .voltar {
@@ -158,7 +158,7 @@ h2 {
 
 /* ----- 8. Tela do jogo: caixa principal ----- */
 .painel {
-  width: 720px;
+  width: 680px;
   max-width: 100%;
   padding: 18px;
 }
@@ -174,11 +174,11 @@ h2 {
 
 .acertado strong {
   display: block;
-  font-size: 23px;
+  font-size: 21px;
 }
 
 .acertado span {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 /* grade com 4 colunas para as palavras */
@@ -189,9 +189,9 @@ h2 {
 }
 
 .tile {
-  min-height: 82px;
+  min-height: 75px;
   padding: 6px 4px;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
   color: #34480a;
   background: #5f9fc4;
@@ -225,7 +225,7 @@ h2 {
   text-align: center;
   font-weight: 600;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .acoes {
@@ -237,7 +237,7 @@ h2 {
 
 .acoes button {
   padding: 8px 18px;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
   color: #34480a;
   background: #e6f1a8;
@@ -255,6 +255,6 @@ h2 {
   }
 
   .tile {
-    font-size: 13px;
+    font-size: 12px;
   }
 }
