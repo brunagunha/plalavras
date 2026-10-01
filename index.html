@@ -1,67 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jogo de Conexões - Estudo</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Conexo Escolar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- LOGO FIXA NO CANTO SUPERIOR ESQUERDO (troque src pelo nome do seu arquivo) -->
-  <img src="logo.png" alt="Logo" class="logo" />
+<!-- ===== HTML: tela inicial ===== -->
+<main id="inicio" class="tela ativa">
+  <img class="logo" src="logo.png" alt="Logo">
+  <div class="inicio-grade">
+    <section class="vidro">
+      <h2>Como funciona?</h2>
+      <p>Você recebe 16 palavras e precisa agrupá-las em 4 grupos de 4 palavras que tenham algo em comum.</p>
+      <p>As categorias vão do mais óbvio ao mais abstrato: quanto mais difícil o grupo, mais específica ou criativa é a conexão entre as palavras.</p>
+      <p>A cada partida encerrada você pode iniciar uma nova.</p>
+    </section>
+    <section class="vidro painel-estudo">
+      <h2>Para estudos!</h2>
+      <p>O modo estudo auxilia no treino por meio do jogo.</p>
+      <p>Facilita a memorização de conteúdos!</p>
+      <img class="boneco esq" src="boneco1.png" alt="">
+      <button class="btn-jogue" id="btnJogue">JOGUE</button>
+      <img class="boneco dir" src="boneco2.png" alt="">
+    </section>
+  </div>
+</main>
 
-  <!-- ============ TELA INICIAL ============ -->
-  <section id="tela-inicial" class="tela ativa">
-    <div class="conteudo-inicial">
-      <div class="coluna">
-        <h1 class="titulo">Como funciona?</h1>
-        <ul class="regras">
-          <li>Você recebe 16 palavras e precisa agrupá-las em <strong>4 grupos de 4 palavras</strong> que tenham algo em comum.</li>
-          <li>As categorias vão do mais óbvio ao mais abstrato — quanto mais difícil o grupo, mais específica ou criativa é a conexão entre as palavras.</li>
-          <li>A cada partida encerrada você pode iniciar uma nova.</li>
-        </ul>
-      </div>
-      <div class="coluna direita">
-        <h1 class="titulo">Para estudar!</h1>
-        <ul class="regras">
-          <li>O modo estudo auxilia no treino por meio do jogo.</li>
-          <li>Facilita a memorização de conteúdos!</li>
-        </ul>
-        <button id="btn-jogue" class="btn-jogue">JOGUE</button>
-      </div>
+<!-- ===== HTML: tela do jogo ===== -->
+<main id="jogo" class="tela">
+  <img class="logo" src="logo.png" alt="Logo">
+  <div class="topo">
+    <button class="voltar" id="btnVoltar" aria-label="Voltar para o início">←</button>
+    <div class="barra vidro">
+      <span id="data"></span>
+      <span>Tentativas: <b id="tentativas">0</b></span>
+      <span>Acertos: <b id="acertos">0</b>/4</span>
+    </div>
+  </div>
+  <section class="painel vidro">
+    <div class="acertados" id="acertados"></div>
+    <div class="tabuleiro" id="tabuleiro"></div>
+    <p class="msg" id="msg" role="status"></p>
+    <div class="acoes">
+      <button id="btnEmbaralhar">Embaralhar</button>
+      <button id="btnNova">Nova partida</button>
     </div>
   </section>
+</main>
 
-  <!-- ============ TELA DO JOGO ============ -->
-  <section id="tela-jogo" class="tela">
-    <header class="topo-jogo">
-      <button id="btn-voltar" class="btn-voltar" title="Voltar">←</button>
-      <div class="info-jogo">
-        <span id="data"></span>
-        <span id="tentativas">Erros: 0</span>
-      </div>
-      <button id="btn-embaralhar" class="btn-embaralhar">Embaralhar</button>
-    </header>
-
-    <!-- Área dos grupos resolvidos (fica como na 3ª imagem) -->
-    <div id="grupos-resolvidos"></div>
-
-    <!-- Grade de palavras -->
-    <div id="grade" class="grade"></div>
-
-    <p id="mensagem" class="mensagem"></p>
-  </section>
-
-  <!-- ============ TELA DE VITÓRIA ============ -->
-  <section id="tela-vitoria" class="tela">
-    <div class="cartao-vitoria">
-      <h1>🎉 Parabéns!</h1>
-      <p>Você encontrou todos os grupos com <span id="erros-finais"></span> erro(s).</p>
-      <button id="btn-novamente" class="btn-jogue">JOGAR DE NOVO</button>
-    </div>
-  </section>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

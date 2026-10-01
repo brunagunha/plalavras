@@ -1,295 +1,75 @@
-/* ===== RESET E BASE ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Trebuchet MS", Verdana, sans-serif;
+/* ===== CSS ===== */
+:root{
+  --verde:#4f6b12; --verde-esc:#34480a; --vidro:rgba(90,170,235,.42); --vidro-borda:rgba(255,255,255,.55);
+  --tile:#5f9fc4; --tile-sel:#f2d95c; --acerto:#8fd3d9; --texto:#2f4a0c;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
-
-body, html {
-  height: 100%;
-  overflow: hidden;
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  font-family:'Pixelify Sans','Courier New',monospace; color:var(--texto);
+  background:#7fb6ee url('fundo.webp') center bottom/cover no-repeat fixed;
+  image-rendering:pixelated; overflow-x:hidden;
 }
-
-/* Cenário de fundo — sua imagem exportada do Figma.
-   Se o arquivo fundo.png não existir na pasta, cai no gradiente de reserva */
-body {
-  background:
-    url('fundo.png') center/cover no-repeat fixed,
-    linear-gradient(to bottom, #7ec8f0 0%, #b8e4f5 45%, #a8d94e 46%, #7ab648 60%, #5a9c36 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.tela{display:none;min-height:100%;padding:20px 16px 32px;flex-direction:column;align-items:center}
+.tela.ativa{display:flex}
+.vidro{
+  background:var(--vidro); border:1px solid var(--vidro-borda); border-radius:28px;
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); box-shadow:0 0 28px #8fd0ff99;
 }
+h1,h2{margin:0;color:var(--verde);text-shadow:2px 2px 0 #fff8;letter-spacing:1px}
+.logo{width:64px;height:64px;margin-bottom:8px;filter:brightness(0) invert(1) drop-shadow(0 0 6px #7cc8ff)}
+.painel-estudo{position:relative}
+.boneco{position:absolute;bottom:-14px;height:130px;width:auto;image-rendering:auto;pointer-events:none}
+.boneco.esq{left:6%;bottom:2px}
+.boneco.dir{right:4%;height:120px}
+.painel-estudo{padding-bottom:140px!important}
+.painel-estudo .btn-jogue{position:relative;z-index:1;margin-top:40px}
 
-/* ===== TELAS ===== */
-.tela {
-  display: none;
-  width: 100%;
-  height: 100%;
-  padding: 40px 70px;   /* mais respiro nas laterais */
+/* ----- tela inicial ----- */
+.inicio-grade{display:grid;grid-template-columns:1fr 1fr;gap:28px;width:min(900px,100%);margin:auto 0;align-items:start}
+.inicio-grade .vidro{padding:24px 26px;color:#fff;font-size:15px;line-height:1.45;text-shadow:1px 1px 0 #0003}
+.inicio-grade h2{font-size:26px;margin:-44px 0 14px;text-align:center}
+.inicio-grade p{margin:0 0 14px;padding-left:12px;border-left:2px solid #fffb}
+.btn-jogue{
+  display:block;margin:22px auto 0;font:600 20px 'Pixelify Sans',monospace;color:var(--verde-esc);
+  background:#c4d45a99;border:2px solid #ffffff88;border-radius:18px;padding:12px 38px;cursor:pointer;
+  transition:transform .12s, background .12s;
 }
+.btn-jogue:hover{background:#d8e86e;transform:scale(1.05)}
+.btn-jogue:active{transform:scale(.97)}
+:focus-visible{outline:3px solid #fff;outline-offset:3px}
 
-.tela.ativa {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;   /* filhos usam a largura toda */
-  justify-content: center;
+/* ----- jogo ----- */
+.topo{width:min(640px,100%);display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:15px;margin-bottom:14px}
+.topo .logo-topo{position:absolute;left:50%;top:10px;transform:translateX(-50%)}
+.topo .barra{flex:1;display:flex;justify-content:space-between;padding:8px 18px;border-radius:20px;color:var(--verde-esc);font-weight:600}
+.voltar{background:none;border:0;font-size:34px;line-height:1;color:var(--verde-esc);cursor:pointer;padding:0 6px}
+.painel{width:min(540px,100%);padding:18px}
+.acertados{display:grid;gap:8px;margin-bottom:8px}
+.acertado{
+  background:var(--acerto);border-radius:18px;padding:12px 10px;text-align:center;color:var(--verde-esc);
+  animation:surge .35s ease-out;
 }
-
-/* ===== LOGO (se você adicionou) ===== */
-.logo {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  z-index: 100;
+.acertado strong{display:block;font-size:19px}
+.acertado span{font-size:13px}
+.tabuleiro{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tile{
+  min-height:68px;padding:6px 4px;border:0;border-radius:16px;background:var(--tile);color:var(--verde-esc);
+  font:600 clamp(11px,2.9vw,15px) 'Pixelify Sans',monospace;cursor:pointer;word-break:break-word;
+  transition:transform .1s, background .15s;
 }
-
-/* ===== TELA INICIAL ===== */
-.conteudo-inicial {
-  display: flex;
-  justify-content: space-between;  /* cola uma coluna em cada lado */
-  align-items: flex-start;
-  gap: 80px;
-  width: 100%;
-}
-
-.coluna {
-  flex: 1;
-  max-width: 460px;               /* evita texto gigante em telas largas */
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.coluna.direita {
-  align-items: flex-end;          /* tudo colado à direita */
-  text-align: right;
-  align-self: flex-end;           /* desce a coluna direita como no Figma */
-  margin-bottom: 40px;
-}
-
-.titulo {
-  color: #d7e84b;
-  text-shadow: 2px 2px 0 rgba(90, 120, 40, .6);
-  font-size: 2.2rem;
-  letter-spacing: 1px;
-}
-
-.regras {
-  list-style: none;
-  color: #24506e;
-  font-size: 1.05rem;
-  line-height: 1.6;
-}
-
-.regras li {
-  margin-bottom: 16px;
-  padding-left: 18px;
-  position: relative;
-}
-
-.coluna.direita .regras li {
-  padding-left: 0;
-  padding-right: 18px;
-}
-
-.regras li::before {
-  content: "»";
-  position: absolute;
-  left: 0;
-  color: #d7e84b;
-  font-weight: bold;
-}
-
-.coluna.direita .regras li::before {
-  left: auto;
-  right: 0;
-}
-
-.btn-jogue {
-  align-self: flex-start;
-  background: linear-gradient(#d7e84b, #a8c22e);
-  border: 3px solid #7a9420;
-  border-radius: 40px;
-  color: #3c4d10;
-  font-size: 1.6rem;
-  font-weight: bold;
-  letter-spacing: 3px;
-  padding: 14px 60px;
-  cursor: pointer;
-  box-shadow: 0 5px 0 #5f7a15;
-  transition: transform .1s, box-shadow .1s;
-}
-
-.coluna.direita .btn-jogue {
-  align-self: flex-end;   /* botão colado à direita */
-}
-
-.btn-jogue:hover { filter: brightness(1.08); }
-.btn-jogue:active {
-  transform: translateY(4px);
-  box-shadow: 0 1px 0 #5f7a15;
-}
-
-/* ===== TELA DO JOGO ===== */
-.topo-jogo {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.btn-voltar {
-  background: rgba(255,255,255,.7);
-  border: 2px solid #6aa3c8;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 1.4rem;
-  color: #24506e;
-  cursor: pointer;
-}
-
-.info-jogo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #d7e84b;
-  text-shadow: 1px 1px 0 rgba(90,120,40,.6);
-  font-weight: bold;
-}
-
-.btn-embaralhar {
-  background: rgba(255,255,255,.7);
-  border: 2px solid #6aa3c8;
-  border-radius: 20px;
-  padding: 8px 18px;
-  color: #24506e;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* Grupos já resolvidos */
-#grupos-resolvidos {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.cartao-grupo {
-  background: linear-gradient(#9fd6ea, #7cc0dc);
-  border: 3px solid rgba(255,255,255,.8);
-  border-radius: 16px;
-  padding: 12px 20px;
-  text-align: center;
-  animation: surgir .4s ease;
-}
-
-.cartao-grupo h2 {
-  color: #1d4e6b;
-  font-size: 1.3rem;
-  letter-spacing: 1px;
-}
-
-.cartao-grupo p {
-  color: #2e6a8c;
-  font-size: 1rem;
-}
-
-@keyframes surgir {
-  from { opacity: 0; transform: translateY(-12px) scale(.95); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* Grade de palavras — agora ocupa a tela toda */
-.grade {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-}
-
-.palavra {
-  background: linear-gradient(#a8d8ec, #8ec7e2);
-  border: 3px solid rgba(255,255,255,.85);
-  border-radius: 14px;
-  padding: 26px 10px;         /* cartões mais altos */
-  text-align: center;
-  font-size: 1.15rem;
-  font-weight: bold;
-  color: #24506e;
-  cursor: pointer;
-  user-select: none;
-  transition: transform .12s, background .12s;
-}
-
-.palavra:hover { transform: translateY(-3px); }
-
-.palavra.selecionada {
-  background: linear-gradient(#d7e84b, #b8cf33);
-  border-color: #7a9420;
-  color: #3c4d10;
-  transform: scale(1.04);
-}
-
-.palavra.errada {
-  animation: tremer .4s ease;
-}
-
-@keyframes tremer {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  50% { transform: translateX(6px); }
-  75% { transform: translateX(-4px); }
-}
-
-.mensagem {
-  margin-top: 20px;
-  min-height: 24px;
-  text-align: center;
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.1rem;
-  text-shadow: 1px 1px 0 rgba(0,0,0,.3);
-}
-
-/* ===== TELA DE VITÓRIA ===== */
-.cartao-vitoria {
-  background: rgba(200, 235, 245, 0.75);
-  border: 3px solid rgba(255,255,255,.8);
-  border-radius: 24px;
-  padding: 48px 64px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  color: #24506e;
-  align-self: center;    /* só o cartão centralizado */
-}
-
-.cartao-vitoria h1 {
-  color: #d7e84b;
-  text-shadow: 2px 2px 0 rgba(90,120,40,.6);
-  font-size: 2.4rem;
-}
-
-/* ===== RESPONSIVO ===== */
-@media (max-width: 800px) {
-  .tela { padding: 20px; }
-  .conteudo-inicial { flex-direction: column; gap: 24px; }
-  .coluna { max-width: 100%; }
-  .coluna.direita { align-items: flex-start; text-align: left; align-self: flex-start; }
-  .coluna.direita .regras li { padding-left: 18px; padding-right: 0; }
-  .coluna.direita .regras li::before { left: 0; right: auto; }
-  .coluna.direita .btn-jogue { align-self: flex-start; }
-  .grade { gap: 8px; }
-  .palavra { font-size: .8rem; padding: 14px 4px; }
+.tile:hover{transform:translateY(-2px)}
+.tile.sel{background:var(--tile-sel)}
+.tile.erro{animation:tremer .4s}
+.msg{min-height:22px;margin:12px 0 0;text-align:center;color:#fff;font-weight:600;text-shadow:1px 1px 0 #0004}
+.acoes{display:flex;justify-content:center;gap:10px;margin-top:6px}
+.acoes button{font:600 14px 'Pixelify Sans',monospace;color:var(--verde-esc);background:#e6f1a888;border:2px solid #fff8;border-radius:14px;padding:8px 18px;cursor:pointer}
+.acoes button:hover{background:#e6f1a8}
+@keyframes tremer{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes surge{from{opacity:0;transform:scale(.92)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:720px){
+  .inicio-grade{grid-template-columns:1fr;gap:56px;margin-top:40px}
 }

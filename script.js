@@ -1,164 +1,99 @@
-// ===== BANCO DE TEMAS (conteúdos escolares) =====
-// Cada tema tem um nome e 4 palavras. O jogo sorteia 4 temas por partida.
-const BANCO_DE_TEMAS = [
-  { nome: "Matérias Escolares", palavras: ["Matemática", "História", "Geografia", "Português"] },
-  { nome: "Materiais Escolares", palavras: ["Lápis", "Borracha", "Apontador", "Régua"] },
-  { nome: "Planetas do Sistema Solar", palavras: ["Marte", "Vênus", "Júpiter", "Saturno"] },
-  { nome: "Partes da Célula", palavras: ["Núcleo", "Membrana", "Citoplasma", "Mitocôndria"] },
-  { nome: "Figuras Geométricas", palavras: ["Triângulo", "Círculo", "Quadrado", "Trapézio"] },
-  { nome: "Autores da Literatura", palavras: ["Machado", "Clarice", "Drummond", "Guimarães"] },
-  { nome: "Elementos Químicos", palavras: ["Oxigênio", "Hidrogênio", "Carbono", "Ferro"] },
-  { nome: "Operações Matemáticas", palavras: ["Adição", "Subtração", "Multiplicação", "Divisão"] },
-  { nome: "Estados Físicos da Água", palavras: ["Sólido", "Líquido", "Gasoso", "Vapor"] },
-  { nome: "Épocas do Ano", palavras: ["Verão", "Outono", "Inverno", "Primavera"] },
-  { nome: "Órgãos do Corpo Humano", palavras: ["Coração", "Pulmão", "Fígado", "Rim"] },
-  { nome: "Séries Históricas do Brasil", palavras: ["Colônia", "Império", "República", "Ditadura"] },
+/* ===== JavaScript ===== */
+// Banco de grupos: cada grupo tem um tema e 4 palavras. Adicione quantos quiser.
+const GRUPOS = [
+  {tema:"Figuras geométricas", palavras:["Triângulo","Círculo","Losango","Trapézio"]},
+  {tema:"Biomas brasileiros", palavras:["Cerrado","Caatinga","Pampa","Pantanal"]},
+  {tema:"Partes da célula", palavras:["Núcleo","Membrana","Citoplasma","Ribossomo"]},
+  {tema:"Classes gramaticais", palavras:["Verbo","Substantivo","Adjetivo","Advérbio"]},
+  {tema:"Material escolar", palavras:["Caderno","Borracha","Régua","Mochila"]},
+  {tema:"Estados da matéria", palavras:["Sólido","Líquido","Gasoso","Plasma"]},
+  {tema:"Continentes", palavras:["África","Oceania","Europa","Ásia"]},
+  {tema:"Planetas", palavras:["Mercúrio","Vênus","Marte","Saturno"]},
+  {tema:"Operações matemáticas", palavras:["Soma","Subtração","Divisão","Multiplicação"]},
+  {tema:"Figuras de linguagem", palavras:["Metáfora","Ironia","Hipérbole","Metonímia"]},
+  {tema:"Elementos químicos", palavras:["Oxigênio","Hidrogênio","Carbono","Nitrogênio"]},
+  {tema:"Períodos da História", palavras:["Renascimento","Iluminismo","Feudalismo","Antiguidade"]}
 ];
 
-// ===== ESTADO DO JOGO =====
-let temasDaPartida = [];
-let palavrasRestantes = [];
-let selecionadas = [];
-let erros = 0;
-let resolvidos = 0;
+const $ = id => document.getElementById(id);
+const embaralhar = a => { a = [...a]; for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
 
-// ===== ELEMENTOS =====
-const telaInicial = document.getElementById("tela-inicial");
-const telaJogo = document.getElementById("tela-jogo");
-const telaVitoria = document.getElementById("tela-vitoria");
-const grade = document.getElementById("grade");
-const areaResolvidos = document.getElementById("grupos-resolvidos");
-const mensagem = document.getElementById("mensagem");
-const contadorErros = document.getElementById("tentativas");
+let grupos, tiles, resolvidos, selecionados, tentativas;
 
-// ===== NAVEGAÇÃO =====
-document.getElementById("btn-jogue").addEventListener("click", () => {
-  iniciarPartida();
-  mostrarTela(telaJogo);
-});
-
-document.getElementById("btn-voltar").addEventListener("click", () => mostrarTela(telaInicial));
-
-document.getElementById("btn-novamente").addEventListener("click", () => {
-  iniciarPartida();
-  mostrarTela(telaJogo);
-});
-
-document.getElementById("btn-embaralhar").addEventListener("click", () => {
-  embaralhar(palavrasRestantes);
-  renderizarGrade();
-});
-
-function mostrarTela(tela) {
-  [telaInicial, telaJogo, telaVitoria].forEach(t => t.classList.remove("ativa"));
-  tela.classList.add("ativa");
+function mostrar(id){
+  document.querySelectorAll('.tela').forEach(t => t.classList.toggle('ativa', t.id === id));
+  window.scrollTo(0,0);
 }
 
-// ===== LÓGICA DO JOGO =====
-function iniciarPartida() {
-  // Sorteia 4 temas diferentes do banco
-  temasDaPartida = embaralhar([...BANCO_DE_TEMAS]).slice(0, 4);
+function novaPartida(){
+  grupos = embaralhar(GRUPOS).slice(0,4);
+  tiles = embaralhar(grupos.flatMap((g,i) => g.palavras.map(p => ({palavra:p, grupo:i}))));
+  resolvidos = []; selecionados = []; tentativas = 0;
+  $('data').textContent = new Date().toLocaleDateString('pt-BR');
+  $('msg').textContent = '';
+  desenhar();
+}
 
-  // Cria a lista de 16 palavras, cada uma "lembrando" o tema a que pertence
-  palavrasRestantes = [];
-  temasDaPartida.forEach((tema, idTema) => {
-    tema.palavras.forEach(p => {
-      palavrasRestantes.push({ texto: p, tema: idTema });
-    });
+function desenhar(){
+  $('tentativas').textContent = tentativas;
+  $('acertos').textContent = resolvidos.length;
+
+  // grupos já acertados aparecem no topo (como na 3ª tela do protótipo)
+  $('acertados').innerHTML = '';
+  resolvidos.forEach(i => {
+    const d = document.createElement('div');
+    d.className = 'acertado';
+    d.innerHTML = `<strong>${grupos[i].tema}</strong><span>${grupos[i].palavras.join(', ')}</span>`;
+    $('acertados').appendChild(d);
   });
 
-  embaralhar(palavrasRestantes);
-  selecionadas = [];
-  erros = 0;
-  resolvidos = 0;
-  areaResolvidos.innerHTML = "";
-  contadorErros.textContent = "Erros: 0";
-  mensagem.textContent = "Selecione 4 palavras que tenham algo em comum!";
-  document.getElementById("data").textContent = new Date().toLocaleDateString("pt-BR");
-  renderizarGrade();
-}
-
-function renderizarGrade() {
-  grade.innerHTML = "";
-  palavrasRestantes.forEach((p, i) => {
-    const btn = document.createElement("div");
-    btn.className = "palavra";
-    btn.textContent = p.texto;
-    btn.dataset.indice = i;
-    btn.addEventListener("click", () => selecionarPalavra(i, btn));
-    grade.appendChild(btn);
+  // palavras restantes
+  const tab = $('tabuleiro');
+  tab.innerHTML = '';
+  tiles.filter(t => !resolvidos.includes(t.grupo)).forEach(t => {
+    const b = document.createElement('button');
+    b.className = 'tile' + (selecionados.includes(t) ? ' sel' : '');
+    b.textContent = t.palavra;
+    b.onclick = () => alternar(t);
+    t.el = b;
+    tab.appendChild(b);
   });
 }
 
-function selecionarPalavra(indice, elemento) {
-  const jaSelecionada = selecionadas.findIndex(s => s.indice === indice);
-
-  // Clique numa já selecionada = desseleciona
-  if (jaSelecionada !== -1) {
-    selecionadas.splice(jaSelecionada, 1);
-    elemento.classList.remove("selecionada");
-    return;
-  }
-
-  // Máximo de 4 selecionadas
-  if (selecionadas.length === 4) return;
-
-  selecionadas.push({ indice, tema: palavrasRestantes[indice].tema });
-  elemento.classList.add("selecionada");
-
-  if (selecionadas.length === 4) verificarGrupo();
+function alternar(t){
+  if (resolvidos.length === 4) return;
+  const pos = selecionados.indexOf(t);
+  if (pos >= 0) selecionados.splice(pos,1);
+  else if (selecionados.length < 4) selecionados.push(t);
+  $('msg').textContent = '';
+  desenhar();
+  if (selecionados.length === 4) setTimeout(verificar, 250);
 }
 
-function verificarGrupo() {
-  const mesmoTema = selecionadas.every(s => s.tema === selecionadas[0].tema);
-
-  if (mesmoTema) {
-    // ACERTOU: move o grupo para a área de resolvidos (como na 3ª imagem)
-    const tema = temasDaPartida[selecionadas[0].tema];
-    const palavrasDoGrupo = selecionadas.map(s => palavrasRestantes[s.indice].texto);
-
-    const cartao = document.createElement("div");
-    cartao.className = "cartao-grupo";
-    cartao.innerHTML = `<h2>${tema.nome}</h2><p>${palavrasDoGrupo.join(", ")}</p>`;
-    areaResolvidos.appendChild(cartao);
-
-    // Remove as palavras da grade
-    const indices = selecionadas.map(s => s.indice).sort((a, b) => b - a);
-    indices.forEach(i => palavrasRestantes.splice(i, 1));
-
-    resolvidos++;
-    mensagem.textContent = "🎉 Grupo correto! Continue assim.";
-    selecionadas = [];
-    renderizarGrade();
-
-    if (resolvidos === 4) {
-      setTimeout(() => {
-        document.getElementById("erros-finais").textContent = erros;
-        mostrarTela(telaVitoria);
-      }, 800);
-    }
+function verificar(){
+  tentativas++;
+  const g = selecionados[0].grupo;
+  if (selecionados.every(t => t.grupo === g)){
+    resolvidos.push(g);
+    selecionados = [];
+    $('msg').textContent = resolvidos.length === 4
+      ? `Parabéns! Você acertou os 4 grupos em ${tentativas} tentativas.`
+      : 'Grupo certo!';
+    desenhar();
   } else {
-    // ERROU: tremer e desselecionar
-    erros++;
-    contadorErros.textContent = `Erros: ${erros}`;
-    mensagem.textContent = "❌ Essas palavras não formam um grupo. Tente de novo!";
-
-    selecionadas.forEach(s => {
-      const el = grade.querySelector(`[data-indice="${s.indice}"]`);
-      if (el) {
-        el.classList.add("errada");
-        setTimeout(() => el.classList.remove("errada", "selecionada"), 450);
-      }
-    });
-    selecionadas = [];
+    const erradas = [...selecionados];
+    // quantas palavras do grupo mais frequente? "Quase!" se for 3 de 4
+    const cont = {}; erradas.forEach(t => cont[t.grupo] = (cont[t.grupo]||0)+1);
+    const quase = Math.max(...Object.values(cont)) === 3;
+    desenhar();
+    erradas.forEach(t => t.el && t.el.classList.add('erro'));
+    $('msg').textContent = quase ? 'Quase! Falta só uma palavra.' : 'Esses não combinam. Tente de novo.';
+    setTimeout(() => { selecionados = []; desenhar(); }, 450);
+    $('tentativas').textContent = tentativas;
   }
 }
 
-// Fisher-Yates
-function embaralhar(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
+$('btnJogue').onclick = () => { novaPartida(); mostrar('jogo'); };
+$('btnVoltar').onclick = () => mostrar('inicio');
+$('btnNova').onclick = novaPartida;
+$('btnEmbaralhar').onclick = () => { tiles = embaralhar(tiles); desenhar(); };
