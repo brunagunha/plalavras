@@ -1,75 +1,259 @@
-/* ===== CSS ===== */
-:root{
-  --verde:#4f6b12; --verde-esc:#34480a; --vidro:rgba(90,170,235,.42); --vidro-borda:rgba(255,255,255,.55);
-  --tile:#5f9fc4; --tile-sel:#f2d95c; --acerto:#8fd3d9; --texto:#2f4a0c;
-  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
-}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*,*::before,*::after{box-sizing:border-box}
-html,body{height:100%;margin:0}
-body{
-  font-family:'Pixelify Sans','Courier New',monospace; color:var(--texto);
-  background:#7fb6ee url('fundo.webp') center bottom/cover no-repeat fixed;
-  image-rendering:pixelated; overflow-x:hidden;
-}
-.tela{display:none;min-height:100%;padding:20px 16px 32px;flex-direction:column;align-items:center}
-.tela.ativa{display:flex}
-.vidro{
-  background:var(--vidro); border:1px solid var(--vidro-borda); border-radius:28px;
-  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); box-shadow:0 0 28px #8fd0ff99;
-}
-h1,h2{margin:0;color:var(--verde);text-shadow:2px 2px 0 #fff8;letter-spacing:1px}
-.logo{width:64px;height:64px;margin-bottom:8px;filter:brightness(0) invert(1) drop-shadow(0 0 6px #7cc8ff)}
-.painel-estudo{position:relative}
-.boneco{position:absolute;bottom:-14px;height:130px;width:auto;image-rendering:auto;pointer-events:none}
-.boneco.esq{left:6%;bottom:2px}
-.boneco.dir{right:4%;height:120px}
-.painel-estudo{padding-bottom:140px!important}
-.painel-estudo .btn-jogue{position:relative;z-index:1;margin-top:40px}
+/* ==========================================
+   ESTILO DO SITE "CONEXO ESCOLAR"
+   O CSS decide a aparência: cores, tamanhos e posições
+   ========================================== */
 
-/* ----- tela inicial ----- */
-.inicio-grade{display:grid;grid-template-columns:1fr 1fr;gap:28px;width:min(900px,100%);margin:auto 0;align-items:start}
-.inicio-grade .vidro{padding:24px 26px;color:#fff;font-size:15px;line-height:1.45;text-shadow:1px 1px 0 #0003}
-.inicio-grade h2{font-size:26px;margin:-44px 0 14px;text-align:center}
-.inicio-grade p{margin:0 0 14px;padding-left:12px;border-left:2px solid #fffb}
-.btn-jogue{
-  display:block;margin:22px auto 0;font:600 20px 'Pixelify Sans',monospace;color:var(--verde-esc);
-  background:#c4d45a99;border:2px solid #ffffff88;border-radius:18px;padding:12px 38px;cursor:pointer;
-  transition:transform .12s, background .12s;
+/* ----- 1. Configurações gerais ----- */
+* {
+  box-sizing: border-box;   /* o tamanho da caixa já inclui o espaçamento interno */
 }
-.btn-jogue:hover{background:#d8e86e;transform:scale(1.05)}
-.btn-jogue:active{transform:scale(.97)}
-:focus-visible{outline:3px solid #fff;outline-offset:3px}
 
-/* ----- jogo ----- */
-.topo{width:min(640px,100%);display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:15px;margin-bottom:14px}
-.topo .logo-topo{position:absolute;left:50%;top:10px;transform:translateX(-50%)}
-.topo .barra{flex:1;display:flex;justify-content:space-between;padding:8px 18px;border-radius:20px;color:var(--verde-esc);font-weight:600}
-.voltar{background:none;border:0;font-size:34px;line-height:1;color:var(--verde-esc);cursor:pointer;padding:0 6px}
-.painel{width:min(540px,100%);padding:18px}
-.acertados{display:grid;gap:8px;margin-bottom:8px}
-.acertado{
-  background:var(--acerto);border-radius:18px;padding:12px 10px;text-align:center;color:var(--verde-esc);
-  animation:surge .35s ease-out;
+body {
+  margin: 0;                                   /* tira a margem padrão da página */
+  font-family: 'Pixelify Sans', monospace;     /* fonte pixelada */
+  color: #34480a;                              /* verde escuro */
+  background: url('fundo.webp') center bottom / cover no-repeat fixed;   /* imagem de fundo */
 }
-.acertado strong{display:block;font-size:19px}
-.acertado span{font-size:13px}
-.tabuleiro{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.tile{
-  min-height:68px;padding:6px 4px;border:0;border-radius:16px;background:var(--tile);color:var(--verde-esc);
-  font:600 clamp(11px,2.9vw,15px) 'Pixelify Sans',monospace;cursor:pointer;word-break:break-word;
-  transition:transform .1s, background .15s;
+
+button {
+  font-family: inherit;   /* os botões usam a mesma fonte da página */
 }
-.tile:hover{transform:translateY(-2px)}
-.tile.sel{background:var(--tile-sel)}
-.tile.erro{animation:tremer .4s}
-.msg{min-height:22px;margin:12px 0 0;text-align:center;color:#fff;font-weight:600;text-shadow:1px 1px 0 #0004}
-.acoes{display:flex;justify-content:center;gap:10px;margin-top:6px}
-.acoes button{font:600 14px 'Pixelify Sans',monospace;color:var(--verde-esc);background:#e6f1a888;border:2px solid #fff8;border-radius:14px;padding:8px 18px;cursor:pointer}
-.acoes button:hover{background:#e6f1a8}
-@keyframes tremer{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-@keyframes surge{from{opacity:0;transform:scale(.92)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-@media (max-width:720px){
-  .inicio-grade{grid-template-columns:1fr;gap:56px;margin-top:40px}
+
+/* ----- 2. As duas telas (início e jogo) ----- */
+.tela {
+  display: none;            /* por padrão, a tela fica escondida */
+  min-height: 100vh;
+  padding: 20px 16px 32px;
+  flex-direction: column;
+  align-items: center;      /* centraliza o conteúdo */
+}
+
+.tela.ativa {
+  display: flex;            /* a tela com a classe "ativa" aparece */
+}
+
+/* ----- 3. Caixa transparente azul ("vidro") ----- */
+.vidro {
+  background: rgba(90, 170, 235, 0.42);        /* azul meio transparente */
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 28px;                         /* cantos arredondados */
+  box-shadow: 0 0 28px rgba(143, 208, 255, 0.6);
+  backdrop-filter: blur(6px);                  /* desfoca o fundo atrás da caixa */
+}
+
+h2 {
+  margin: 0;
+  color: #4f6b12;
+  text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 8px;
+  filter: brightness(0) invert(1);   /* deixa o logo branco */
+}
+
+/* ----- 4. Tela inicial ----- */
+.inicio-grade {
+  display: flex;            /* coloca as duas caixas lado a lado */
+  gap: 28px;                /* espaço entre elas */
+  width: 900px;
+  max-width: 100%;
+  margin: auto 0;
+  align-items: flex-start;
+}
+
+.inicio-grade .vidro {
+  flex: 1;                  /* as duas caixas têm o mesmo tamanho */
+  padding: 24px 26px;
+  color: white;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.inicio-grade h2 {
+  margin: -44px 0 14px 0;   /* margem negativa: o título sobe para fora da caixa */
+  font-size: 26px;
+  text-align: center;
+}
+
+.inicio-grade p {
+  margin: 0 0 14px 0;
+  padding-left: 12px;
+  border-left: 2px solid white;   /* linha branca ao lado do texto */
+}
+
+.inicio-grade .painel-estudo {
+  position: relative;       /* permite posicionar os bonecos dentro da caixa */
+  padding-bottom: 140px;    /* espaço embaixo para os bonecos */
+}
+
+/* ----- 5. Botão JOGUE ----- */
+.btn-jogue {
+  position: relative;
+  z-index: 1;               /* fica na frente dos bonecos */
+  display: block;
+  margin: 40px auto 0 auto;
+  padding: 12px 38px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #34480a;
+  background: #d8e86e;
+  border: 2px solid white;
+  border-radius: 18px;
+  cursor: pointer;          /* mãozinha ao passar o mouse */
+}
+
+.btn-jogue:hover {
+  background: #eef79a;      /* muda de cor quando o mouse passa por cima */
+}
+
+/* ----- 6. Bonecos ----- */
+.boneco {
+  position: absolute;       /* posição livre dentro da caixa */
+  height: 130px;
+  pointer-events: none;     /* o clique passa direto pelo boneco */
+}
+
+.boneco.esq {
+  left: 6%;
+  bottom: 2px;
+}
+
+.boneco.dir {
+  right: 4%;
+  bottom: -14px;
+  height: 120px;
+}
+
+/* ----- 7. Tela do jogo: barra do topo ----- */
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 640px;
+  max-width: 100%;
+  margin-bottom: 14px;
+  font-size: 15px;
+}
+
+.voltar {
+  background: none;
+  border: 0;
+  font-size: 34px;
+  color: #34480a;
+  cursor: pointer;
+}
+
+.topo .barra {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;   /* data, tentativas e acertos espalhados */
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* ----- 8. Tela do jogo: caixa principal ----- */
+.painel {
+  width: 540px;
+  max-width: 100%;
+  padding: 18px;
+}
+
+/* faixas dos grupos que o jogador já acertou */
+.acertado {
+  margin-bottom: 8px;
+  padding: 12px 10px;
+  background: #8fd3d9;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.acertado strong {
+  display: block;
+  font-size: 19px;
+}
+
+.acertado span {
+  font-size: 13px;
+}
+
+/* grade com 4 colunas para as palavras */
+.tabuleiro {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* 4 colunas do mesmo tamanho */
+  gap: 8px;
+}
+
+.tile {
+  min-height: 68px;
+  padding: 6px 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #34480a;
+  background: #5f9fc4;
+  border: 0;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.tile:hover {
+  background: #7dbbe0;
+}
+
+.tile.sel {
+  background: #f2d95c;      /* amarelo: palavra selecionada */
+}
+
+.tile.erro {
+  animation: tremer 0.4s;   /* palavras erradas tremem */
+}
+
+/* animação de tremer: vai um pouco para a esquerda e para a direita */
+@keyframes tremer {
+  25%  { transform: translateX(-6px); }
+  75%  { transform: translateX(6px); }
+}
+
+/* ----- 9. Mensagem e botões de baixo ----- */
+.msg {
+  min-height: 22px;
+  margin: 12px 0 0 0;
+  text-align: center;
+  font-weight: 600;
+  color: white;
+}
+
+.acoes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.acoes button {
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #34480a;
+  background: #e6f1a8;
+  border: 2px solid white;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+/* ----- 10. Celular: telas pequenas ----- */
+@media (max-width: 720px) {
+  .inicio-grade {
+    flex-direction: column;   /* as caixas ficam uma embaixo da outra */
+    gap: 56px;
+    margin-top: 40px;
+  }
+
+  .tile {
+    font-size: 11px;
+  }
 }
