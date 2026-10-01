@@ -10,7 +10,7 @@
 
 body {
   margin: 0;                                   /* tira a margem padrão da página */
-  font-family: 'Pixelify Sans', monospace;     /* fonte pixelada */
+  font-family: 'Bauhaus 93', sans-serif;   /* Bauhaus 93 (instalada no computador); sans-serif é a reserva */
   color: #34480a;                              /* verde escuro */
   background: url('fundo.webp') center bottom / cover no-repeat fixed;   /* imagem de fundo */
 }
@@ -97,7 +97,7 @@ h2 {
   margin: 40px auto 0 auto;
   padding: 13px 42px;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: normal;
   color: #34480a;
   background: #d8e86e;
   border: 2px solid white;
@@ -153,7 +153,7 @@ h2 {
   justify-content: space-between;   /* data, tentativas e acertos espalhados */
   padding: 8px 18px;
   border-radius: 20px;
-  font-weight: 600;
+  font-weight: normal;
 }
 
 /* ----- 8. Tela do jogo: caixa principal ----- */
@@ -192,7 +192,7 @@ h2 {
   min-height: 75px;
   padding: 6px 4px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: normal;
   color: #34480a;
   background: #5f9fc4;
   border: 0;
@@ -223,7 +223,7 @@ h2 {
   min-height: 22px;
   margin: 12px 0 0 0;
   text-align: center;
-  font-weight: 600;
+  font-weight: normal;
   color: white;
   font-size: 16px;
 }
@@ -238,7 +238,7 @@ h2 {
 .acoes button {
   padding: 8px 18px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: normal;
   color: #34480a;
   background: #e6f1a8;
   border: 2px solid white;
@@ -257,4 +257,9 @@ h2 {
   .tile {
     font-size: 12px;
   }
+}
+
+/* a fonte Bauhaus 93 já é grossa, então não usamos negrito */
+strong {
+  font-weight: normal;
 }
