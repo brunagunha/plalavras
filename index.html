@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Conexo Escolar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== HTML: tela inicial ===== -->
+<main id="inicio" class="tela ativa">
+  <img class="logo" src="logo.png" alt="Logo">
+  <div class="inicio-grade">
+    <section class="vidro">
+      <h2>Como funciona?</h2>
+      <p>Você recebe 16 palavras e precisa agrupá-las em 4 grupos de 4 palavras que tenham algo em comum.</p>
+      <p>As categorias vão do mais óbvio ao mais abstrato: quanto mais difícil o grupo, mais específica ou criativa é a conexão entre as palavras.</p>
+      <p>A cada partida encerrada você pode iniciar uma nova.</p>
+    </section>
+    <section class="vidro painel-estudo">
+      <h2>Para estudos!</h2>
+      <p>O modo estudo auxilia no treino por meio do jogo.</p>
+      <p>Facilita a memorização de conteúdos!</p>
+      <img class="boneco esq" src="boneco1.png" alt="">
+      <button class="btn-jogue" id="btnJogue">JOGUE</button>
+      <img class="boneco dir" src="boneco2.png" alt="">
+    </section>
+  </div>
+</main>
+
+<!-- ===== HTML: tela do jogo ===== -->
+<main id="jogo" class="tela">
+  <img class="logo" src="logo.png" alt="Logo">
+  <div class="topo">
+    <button class="voltar" id="btnVoltar" aria-label="Voltar para o início">←</button>
+    <div class="barra vidro">
+      <span id="data"></span>
+      <span>Tentativas: <b id="tentativas">0</b></span>
+      <span>Acertos: <b id="acertos">0</b>/4</span>
+    </div>
+  </div>
+  <section class="painel vidro">
+    <div class="acertados" id="acertados"></div>
+    <div class="tabuleiro" id="tabuleiro"></div>
+    <p class="msg" id="msg" role="status"></p>
+    <div class="acoes">
+      <button id="btnEmbaralhar">Embaralhar</button>
+      <button id="btnNova">Nova partida</button>
+    </div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
