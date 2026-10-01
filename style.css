@@ -68,13 +68,13 @@ h2 {
   flex: 1;                  /* as duas caixas têm o mesmo tamanho */
   padding: 24px 26px;
   color: white;
-  font-size: 15px;
+  font-size: 30px;
   line-height: 1.45;
 }
 
 .inicio-grade h2 {
   margin: -44px 0 14px 0;   /* margem negativa: o título sobe para fora da caixa */
-  font-size: 26px;
+  font-size: 36px;
   text-align: center;
 }
 
@@ -96,7 +96,7 @@ h2 {
   display: block;
   margin: 40px auto 0 auto;
   padding: 12px 38px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
   color: #34480a;
   background: #d8e86e;
@@ -136,7 +136,7 @@ h2 {
   width: 640px;
   max-width: 100%;
   margin-bottom: 14px;
-  font-size: 15px;
+  font-size: 30px;
 }
 
 .voltar {
@@ -191,7 +191,7 @@ h2 {
 .tile {
   min-height: 68px;
   padding: 6px 4px;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 600;
   color: #34480a;
   background: #5f9fc4;
@@ -236,7 +236,7 @@ h2 {
 
 .acoes button {
   padding: 8px 18px;
-  font-size: 14px;
+  font-size: 28px;
   font-weight: 600;
   color: #34480a;
   background: #e6f1a8;
@@ -254,6 +254,6 @@ h2 {
   }
 
   .tile {
-    font-size: 11px;
+    font-size: 22px;
   }
 }
