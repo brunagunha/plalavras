@@ -1,7 +1,4 @@
-// ==========================================
-// CÓDIGO DO JOGO "CONEXO ESCOLAR"
-// O JavaScript faz o jogo funcionar
-// ==========================================
+
 
 // 1. Banco de grupos: cada grupo tem um tema e 4 palavras.
 // Para criar novos desafios, é só adicionar mais grupos aqui.
