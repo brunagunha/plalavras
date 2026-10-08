@@ -1,16 +1,11 @@
-/* ==========================================
-   ESTILO DO SITE "CONEXO ESCOLAR"
-   O CSS decide a aparência: cores, tamanhos e posições
-   ========================================== */
 
-/* ----- 1. Configurações gerais ----- */
 * {
-  box-sizing: border-box;   /* o tamanho da caixa já inclui o espaçamento interno */
+  box-sizing: border-box;  
 }
 
 body {
-  margin: 0;                                   /* tira a margem padrão da página */
-  font-family: 'Bauhaus 93', sans-serif;   /* Bauhaus 93 (instalada no computador); sans-serif é a reserva */
+  margin: 0;                                    
+  font-family: 'Bauhaus 93', century gothic;   /* Bauhaus 93 (instalada no computador); sans-serif é a reserva */
   color: #34480a;                              /* verde escuro */
   background: url('fundo.webp') center bottom / cover no-repeat fixed;   /* imagem de fundo */
 }
