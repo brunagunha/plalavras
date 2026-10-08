@@ -5,7 +5,7 @@
 
 body {
   margin: 0;                                    
-  font-family: 'Bauhaus 93', copperplate gothic;   /* Bauhaus 93 (instalada no computador); sans-serif é a reserva */
+  font-family: 'Bauhaus 93', century gothic;   /* Bauhaus 93 (instalada no computador); sans-serif é a reserva */
   color: #34480a;                              /* verde escuro */
   background: url('fundo.webp') center bottom / cover no-repeat fixed;   /* imagem de fundo */
 }
