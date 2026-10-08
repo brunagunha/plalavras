@@ -119,7 +119,8 @@ h2 {
 .boneco.dir {
   right: -5%;
   bottom: 2px;
-  height: 115px;
+  height: auto;
+  width: 500px;
 }
 
 
