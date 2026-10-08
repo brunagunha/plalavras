@@ -5,13 +5,13 @@
 
 body {
   margin: 0;                                    
-  font-family: 'Bauhaus 93', century gothic;   /* Bauhaus 93 (instalada no computador); sans-serif é a reserva */
-  color: #34480a;                              /* verde escuro */
-  background: url('fundo.webp') center bottom / cover no-repeat fixed;   /* imagem de fundo */
+  font-family: 'Bauhaus 93', century gothic;   
+  color: #34480a;                              
+  background: url('fundo.webp') center bottom / cover no-repeat fixed;   
 }
 
 button {
-  font-family: inherit;   /* os botões usam a mesma fonte da página */
+  font-family: copperplate gothic;  
 }
 
 /* ----- 2. As duas telas (início e jogo) ----- */
