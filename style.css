@@ -11,29 +11,29 @@ body {
 }
 
 button {
-  font-family: copperplate gothic;  
+  font-family: century gothic;  
 }
 
-/* ----- 2. As duas telas (início e jogo) ----- */
+
 .tela {
-  display: none;            /* por padrão, a tela fica escondida */
+  display: none;           
   min-height: 100vh;
   padding: 20px 16px 32px;
   flex-direction: column;
-  align-items: center;      /* centraliza o conteúdo */
+  align-items: center;      
 }
 
 .tela.ativa {
-  display: flex;            /* a tela com a classe "ativa" aparece */
+  display: flex;            
 }
 
-/* ----- 3. Caixa transparente azul ("vidro") ----- */
+
 .vidro {
-  background: rgba(90, 170, 235, 0.42);        /* azul meio transparente */
+  background: rgba(90, 170, 235, 0.42);       
   border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 28px;                         /* cantos arredondados */
+  border-radius: 28px;                      
   box-shadow: 0 0 28px rgba(143, 208, 255, 0.6);
-  backdrop-filter: blur(6px);                  /* desfoca o fundo atrás da caixa */
+  backdrop-filter: blur(6px);                 
 }
 
 h2 {
@@ -46,13 +46,13 @@ h2 {
   width: 64px;
   height: 64px;
   margin-bottom: 8px;
-  filter: brightness(0) invert(1);   /* deixa o logo branco */
+  filter: brightness(0) invert(1);  
 }
 
-/* ----- 4. Tela inicial ----- */
+
 .inicio-grade {
-  display: flex;            /* coloca as duas caixas lado a lado */
-  gap: 28px;                /* espaço entre elas */
+  display: flex;           
+  gap: 28px;                
   width: 1000px;
   max-width: 100%;
   margin: auto 0;
@@ -60,7 +60,7 @@ h2 {
 }
 
 .inicio-grade .vidro {
-  flex: 1;                  /* as duas caixas têm o mesmo tamanho */
+  flex: 1;                 
   padding: 26px 29px;
   color: white;
   font-size: 17px;
@@ -68,7 +68,7 @@ h2 {
 }
 
 .inicio-grade h2 {
-  margin: -50px 0 15px 0;   /* margem negativa: o título sobe para fora da caixa */
+  margin: -50px 0 15px 0;   
   font-size: 29px;
   text-align: center;
 }
@@ -76,18 +76,18 @@ h2 {
 .inicio-grade p {
   margin: 0 0 14px 0;
   padding-left: 12px;
-  border-left: 2px solid white;   /* linha branca ao lado do texto */
+  border-left: 2px solid white;   
 }
 
 .inicio-grade .painel-estudo {
-  position: relative;       /* permite posicionar os bonecos dentro da caixa */
-  padding-bottom: 140px;    /* espaço embaixo para os bonecos */
+  position: relative;       
+  padding-bottom: 140px;    
 }
 
-/* ----- 5. Botão JOGUE ----- */
+
 .btn-jogue {
   position: relative;
-  z-index: 1;               /* fica na frente dos bonecos */
+  z-index: 1;               
   display: block;
   margin: 40px auto 0 auto;
   padding: 13px 42px;
@@ -97,18 +97,18 @@ h2 {
   background: #d8e86e;
   border: 2px solid white;
   border-radius: 18px;
-  cursor: pointer;          /* mãozinha ao passar o mouse */
+  cursor: pointer;        
 }
 
 .btn-jogue:hover {
-  background: #eef79a;      /* muda de cor quando o mouse passa por cima */
+  background: #eef79a;      
 }
 
-/* ----- 6. Bonecos ----- */
+
 .boneco {
-  position: absolute;       /* posição livre dentro da caixa */
+  position: absolute;      
   height: 130px;
-  pointer-events: none;     /* o clique passa direto pelo boneco */
+  pointer-events: none;     
 }
 
 .boneco.esq {
@@ -117,7 +117,7 @@ h2 {
 }
 
 .boneco.dir {
-  right: 4%;
+  right: 6%;
   bottom: -14px;
   height: 120px;
 }
