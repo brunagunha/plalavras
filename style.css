@@ -6,9 +6,10 @@
 
 body {
   margin: 0;                                    
-  font-family: 'Archivo Black';  
+  font-family: 'Archivo', sans-serif; 
   color: #34480a;                              
   background: url('fundo.webp') center bottom / cover no-repeat fixed;   
+
 }
 
 button {
@@ -98,7 +99,6 @@ h2 {
   margin: 0 auto; 
   padding: 13px 42px;
   font-size: 22px;
-  font-weight: normal;
   color: #34480a;
   background: #d8e86e;
   border: 2px solid white;
