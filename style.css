@@ -13,13 +13,13 @@
 
 body {
   margin: 0;                                    
-  font-family: 'Bauhaus 93', century gothic;   
+  font-family: 'Bauhaus 93',;   
   color: #34480a;                              
   background: url('fundo.webp') center bottom / cover no-repeat fixed;   
 }
 
 button {
-  font-family: century gothic;  
+  font-family: 'Bauhaus 93';  
 }
 
 
