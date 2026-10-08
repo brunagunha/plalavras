@@ -90,15 +90,20 @@ h2 {
 
 .inicio-grade .painel-estudo {
   position: relative;       
-  padding-bottom: 140px;    
+  display: flex;
+  flex-direction: column;   
+  align-items: center; 
+  justify-content: space-between; 
+  min-height: 380px; 
+  padding: 26px 29px 120px 29px;
 }
 
 
 .btn-jogue {
   position: relative;
   z-index: 1;               
-  display: block;
-  margin: 120px auto 0 auto;
+  display: block;        
+  margin: 0 auto; 
   padding: 13px 42px;
   font-size: 22px;
   font-weight: normal;
@@ -106,7 +111,7 @@ h2 {
   background: #d8e86e;
   border: 2px solid white;
   border-radius: 18px;
-  cursor: pointer;        
+  cursor: pointer;  
 }
 
 .btn-jogue:hover {
