@@ -122,7 +122,7 @@ h2 {
   height: 115px;
 }
 
-/* ----- 7. Tela do jogo: barra do topo ----- */
+
 .topo {
   display: flex;
   align-items: center;
@@ -145,20 +145,20 @@ h2 {
 .topo .barra {
   flex: 1;
   display: flex;
-  justify-content: space-between;   /* data, tentativas e acertos espalhados */
+  justify-content: space-between;   
   padding: 8px 18px;
   border-radius: 20px;
   font-weight: normal;
 }
 
-/* ----- 8. Tela do jogo: caixa principal ----- */
+
 .painel {
   width: 680px;
   max-width: 100%;
   padding: 18px;
 }
 
-/* faixas dos grupos que o jogador já acertou */
+
 .acertado {
   margin-bottom: 8px;
   padding: 12px 10px;
@@ -176,10 +176,10 @@ h2 {
   font-size: 14px;
 }
 
-/* grade com 4 colunas para as palavras */
+
 .tabuleiro {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);   /* 4 colunas do mesmo tamanho */
+  grid-template-columns: repeat(4, 1fr);   
   gap: 8px;
 }
 
@@ -200,20 +200,20 @@ h2 {
 }
 
 .tile.sel {
-  background: #f2d95c;      /* amarelo: palavra selecionada */
+  background: #f2d95c;      
 }
 
 .tile.erro {
-  animation: tremer 0.4s;   /* palavras erradas tremem */
+  animation: tremer 0.4s;   
 }
 
-/* animação de tremer: vai um pouco para a esquerda e para a direita */
+
 @keyframes tremer {
   25%  { transform: translateX(-6px); }
   75%  { transform: translateX(6px); }
 }
 
-/* ----- 9. Mensagem e botões de baixo ----- */
+
 .msg {
   min-height: 22px;
   margin: 12px 0 0 0;
@@ -241,10 +241,10 @@ h2 {
   cursor: pointer;
 }
 
-/* ----- 10. Celular: telas pequenas ----- */
+
 @media (max-width: 720px) {
   .inicio-grade {
-    flex-direction: column;   /* as caixas ficam uma embaixo da outra */
+    flex-direction: column;   
     gap: 56px;
     margin-top: 40px;
   }
@@ -254,7 +254,6 @@ h2 {
   }
 }
 
-/* a fonte Bauhaus 93 já é grossa, então não usamos negrito */
 strong {
   font-weight: normal;
 }
